@@ -1,0 +1,372 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+    background: #f0f7f4;
+    color: #1e2a2e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 16px;
+}
+
+.game-container {
+    background: #ffffff;
+    max-width: 860px;
+    width: 100%;
+    border-radius: 28px;
+    box-shadow: 0 20px 40px rgba(0, 40, 30, 0.12);
+    overflow: hidden;
+    border: 1px solid #cfe3db;
+}
+
+/* Header */
+.header {
+    background: #1b4d3e;
+    color: #e6f4ef;
+    padding: 20px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.header h1 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.header h1 span {
+    font-size: 1.6rem;
+}
+
+.stats {
+    display: flex;
+    gap: 18px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 8px 16px;
+    border-radius: 40px;
+}
+
+.stats div span {
+    font-weight: 700;
+    color: #a8e6cf;
+}
+
+/* Progress bar */
+.progress-track {
+    height: 6px;
+    background: #d9e9e3;
+    width: 100%;
+}
+
+.progress-fill {
+    height: 6px;
+    background: #2e8b6e;
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+/* Main area */
+.main {
+    padding: 28px 28px 32px;
+}
+
+.category-badge {
+    display: inline-block;
+    background: #e3f2ec;
+    color: #1b4d3e;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    padding: 6px 14px;
+    border-radius: 40px;
+    margin-bottom: 16px;
+}
+
+.question-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    font-weight: 500;
+    margin-bottom: 24px;
+    color: #0f2b23;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 24px;
+}
+
+.option-btn {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    background: #f8fbfa;
+    border: 2px solid #d7e8e1;
+    border-radius: 14px;
+    padding: 14px 18px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    text-align: left;
+    font-family: inherit;
+    color: #1e2a2e;
+}
+
+.option-btn:hover:not(.disabled) {
+    background: #eef7f2;
+    border-color: #2e8b6e;
+}
+
+.option-btn.selected {
+    border-color: #2e8b6e;
+    background: #e3f2ec;
+    box-shadow: 0 0 0 3px rgba(46, 139, 110, 0.15);
+}
+
+.option-btn.correct {
+    border-color: #1b8a5a;
+    background: #e0f5e9;
+    box-shadow: 0 0 0 3px rgba(27, 138, 90, 0.15);
+}
+
+.option-btn.wrong {
+    border-color: #c0392b;
+    background: #fdeaea;
+    box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.12);
+}
+
+.option-btn.disabled {
+    cursor: default;
+    opacity: 0.85;
+}
+
+.option-letter {
+    background: #1b4d3e;
+    color: white;
+    min-width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+.option-btn.correct .option-letter {
+    background: #1b8a5a;
+}
+
+.option-btn.wrong .option-letter {
+    background: #c0392b;
+}
+
+/* Feedback / correction panel */
+.correction-panel {
+    background: #f4faf7;
+    border-left: 6px solid #2e8b6e;
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-bottom: 24px;
+    display: none;
+}
+
+.correction-panel.show {
+    display: block;
+}
+
+.correction-panel .verdict {
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 8px;
+}
+
+.correction-panel .verdict.correct {
+    color: #1b8a5a;
+}
+
+.correction-panel .verdict.wrong {
+    color: #c0392b;
+}
+
+.correction-panel .explanation {
+    font-size: 0.93rem;
+    line-height: 1.6;
+    color: #2a3c36;
+}
+
+.correction-panel .explanation strong {
+    color: #1b4d3e;
+}
+
+/* Footer actions */
+.actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 14px 28px;
+    border-radius: 40px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s ease;
+}
+
+.btn-primary {
+    background: #1b4d3e;
+    color: white;
+    flex: 1;
+    min-width: 180px;
+}
+
+.btn-primary:hover:not(:disabled) {
+    background: #12382c;
+}
+
+.btn-primary:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.btn-secondary {
+    background: transparent;
+    color: #1b4d3e;
+    border: 2px solid #bdd6cc;
+}
+
+.btn-secondary:hover:not(:disabled) {
+    background: #eef7f2;
+}
+
+.btn-secondary:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* Results screen */
+.results {
+    display: none;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.results.show {
+    display: block;
+}
+
+.results .big-score {
+    font-size: 4rem;
+    font-weight: 800;
+    color: #1b4d3e;
+    line-height: 1;
+}
+
+.results .big-score small {
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: #7a9e8e;
+}
+
+.results .message {
+    font-size: 1.1rem;
+    margin: 12px 0 20px;
+    color: #2a3c36;
+}
+
+.results .breakdown {
+    display: inline-flex;
+    gap: 28px;
+    background: #f4faf7;
+    padding: 18px 32px;
+    border-radius: 20px;
+    margin-bottom: 28px;
+}
+
+.breakdown div {
+    text-align: center;
+}
+
+.breakdown .num {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.breakdown .num.green {
+    color: #1b8a5a;
+}
+
+.breakdown .num.red {
+    color: #c0392b;
+}
+
+.breakdown .label {
+    font-size: 0.8rem;
+    color: #6b7f76;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 4px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .main {
+        padding: 20px 18px 24px;
+    }
+
+    .header {
+        padding: 16px 18px;
+    }
+
+    .header h1 {
+        font-size: 1.05rem;
+    }
+
+    .stats {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+        gap: 12px;
+    }
+
+    .question-text {
+        font-size: 1rem;
+    }
+
+    .option-btn {
+        padding: 12px 14px;
+        font-size: 0.9rem;
+    }
+
+    .btn {
+        padding: 12px 20px;
+        font-size: 0.9rem;
+    }
+
+    .results .breakdown {
+        gap: 16px;
+        padding: 14px 20px;
+    }
+}
